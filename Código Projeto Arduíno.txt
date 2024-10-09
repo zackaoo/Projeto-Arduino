@@ -1,0 +1,71 @@
+#define pecho 10
+#define ptring 9
+#define buzzer 11
+#define D1 20
+#define D2 40
+#define D3 60
+#define D4 80
+long duracion, distancia;
+
+void setup()
+{
+ Serial.begin(9600);
+  pinMode(10, INPUT);
+  pinMode(9, OUTPUT);
+  pinMode(11, OUTPUT);
+}
+
+void loop()
+ {
+ 
+  digitalWrite(9,LOW);
+  delayMicroseconds(2);
+ 
+  digitalWrite(9, HIGH);
+  delayMicroseconds(10);
+
+  digitalWrite(9,LOW);
+ 
+  duracion=pulseIn(10,HIGH);
+  distancia=(duracion/2)/ 29; //formula de distancia
+
+  if(distancia<=0) {
+   Serial.println("no lectura");
+  }
+  else{
+   Serial.println(distancia);
+   Serial.println("cm");
+  }
+  delay(500);
+
+ if (distancia>=0 && distancia<=20)
+  {
+   tone(buzzer, 1100);//Ligando o buzzer com uma frequência de 1500 Hz.
+   delay(500);//Intervalo de 500 milissegundos
+   noTone(buzzer);//Desligando o buzzer.
+
+ }
+
+ if (distancia>=D1 && distancia<=D2)
+  {
+   tone(buzzer, 750);//Ligando o buzzer com uma frequência de 1500 Hz.
+   delay(500);//Intervalo de 500 milissegundos
+   noTone(buzzer);//Desligando o buzzer.
+
+ }
+  if (distancia>=D2 && distancia<=D3)
+   {
+    tone(buzzer, 500);//Ligando o buzzer com uma frequência de 1500 Hz.
+    delay(500);//Intervalo de 500 milissegundos
+    noTone(buzzer);//Desligando o buzzer.
+
+ }
+  if (distancia>=D3 && distancia<=D4)
+   {
+    tone(buzzer, 250);//Ligando o buzzer com uma frequência de 1500 Hz.
+    delay(500);//Intervalo de 500 milissegundos
+    noTone(buzzer);//Desligando o buzzer.
+
+ }
+
+ }
